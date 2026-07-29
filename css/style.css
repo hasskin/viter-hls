@@ -1,0 +1,369 @@
+/* ============================================================
+   VITER-HLS · Augsburg — Heizung · Lüftung · Sanitär
+   Design tokens
+   porcelain  #F4F7F8  (kühles Fliesenweiß, Flächen)
+   ink        #10171C  (Anthrazit, Text)
+   steel      #4C5B63  (Sekundärtext)
+   rot        #D93A2B  (Vorlauf / Heizung)
+   blau       #1A63C7  (Rücklauf / Sanitär, Wasser)
+   luft       #E89B2D  (Lüftung)
+   gruen      #1E8A5B  (Wärmepumpe / Umwelt)
+   line       #D9E1E5  (Haarlinien)
+   ============================================================ */
+
+:root {
+  --porcelain: #F4F7F8;
+  --paper: #FDFEFE;
+  --ink: #10171C;
+  --steel: #4C5B63;
+  --rot: #D93A2B;
+  --blau: #1A63C7;
+  --luft: #E89B2D;
+  --gruen: #1E8A5B;
+  --line: #D9E1E5;
+  --font-display: "Archivo", "Arial Narrow", sans-serif;
+  --font-body: "Instrument Sans", "Helvetica Neue", sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+  --max: 1180px;
+  --pad: clamp(20px, 4vw, 48px);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--porcelain);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: inherit; }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad); }
+
+/* ---------- Display type ---------- */
+h1, h2, .display {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.02;
+}
+
+h1 { font-size: clamp(2.2rem, 5.2vw, 4rem); }
+h2 { font-size: clamp(1.7rem, 3.6vw, 2.6rem); margin-bottom: 18px; }
+h3 {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.12rem;
+  letter-spacing: 0.03em;
+}
+
+/* Rohrleitungs-Etikett (mono tag) */
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--steel);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.tag::before {
+  content: "";
+  width: 26px;
+  height: 8px;
+  border-top: 3px solid var(--rot);
+  border-bottom: 3px solid var(--blau);
+}
+.tag--rot::before { border-top-color: var(--rot); border-bottom-color: var(--rot); }
+.tag--blau::before { border-top-color: var(--blau); border-bottom-color: var(--blau); }
+.tag--luft::before { border-top-color: var(--luft); border-bottom-color: var(--luft); }
+.tag--gruen::before { border-top-color: var(--gruen); border-bottom-color: var(--gruen); }
+
+/* ---------- Header ---------- */
+.site-head {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(244, 247, 248, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.site-head .wrap {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  height: 64px;
+}
+.brand {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.brand .h { color: var(--rot); }
+.brand .l { color: var(--luft); }
+.brand .s { color: var(--blau); }
+.site-nav { display: flex; gap: 22px; margin-left: auto; }
+.site-nav a {
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--steel);
+}
+.site-nav a:hover { color: var(--ink); }
+.head-tel {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--ink);
+  color: #fff;
+  padding: 9px 16px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.head-tel:hover { background: var(--rot); }
+@media (max-width: 860px) {
+  .site-nav { display: none; }
+  .head-tel { margin-left: auto; }
+}
+
+/* ---------- Hero ---------- */
+.hero { padding: clamp(48px, 8vw, 96px) 0 0; }
+.hero .wrap {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+.hero h1 { margin: 18px 0 22px; }
+.hero h1 .u-rot  { box-shadow: inset 0 -0.14em 0 0 color-mix(in srgb, var(--rot) 45%, transparent); }
+.hero h1 .u-luft { box-shadow: inset 0 -0.14em 0 0 color-mix(in srgb, var(--luft) 55%, transparent); }
+.hero h1 .u-blau { box-shadow: inset 0 -0.14em 0 0 color-mix(in srgb, var(--blau) 40%, transparent); }
+.hero .lede { font-size: 1.12rem; color: var(--steel); max-width: 34em; margin-bottom: 30px; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 26px;
+  border-radius: 4px;
+}
+.btn-primary { background: var(--rot); color: #fff; }
+.btn-primary:hover { background: #b92e21; }
+.btn-ghost { border: 1.5px solid var(--ink); color: var(--ink); }
+.btn-ghost:hover { background: var(--ink); color: #fff; }
+
+.hero-figure { position: relative; }
+.hero-figure img {
+  border-radius: 6px;
+  box-shadow: 0 24px 60px -24px rgba(16, 23, 28, 0.35);
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: 22% 62%;
+  width: 100%;
+}
+.hero-figure figcaption {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 7px 12px;
+  border-radius: 3px;
+}
+.hero-figure figcaption .vl { color: #ff8d80; }
+.hero-figure figcaption .rl { color: #8db8f5; }
+@media (max-width: 860px) {
+  .hero .wrap { grid-template-columns: 1fr; }
+}
+
+/* Rohr-Trenner: animierte Vorlauf/Rücklauf-Doppellinie */
+.pipe-divider {
+  margin-top: clamp(48px, 7vw, 88px);
+  height: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.pipe-divider::before,
+.pipe-divider::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-image: linear-gradient(90deg, currentColor 0 70%, transparent 70% 100%);
+  background-size: 46px 4px;
+}
+.pipe-divider::before { top: 0; color: var(--rot); animation: flow-r 2.4s linear infinite; }
+.pipe-divider::after { bottom: 0; color: var(--blau); animation: flow-l 2.4s linear infinite; }
+@keyframes flow-r { from { background-position-x: 0; } to { background-position-x: 46px; } }
+@keyframes flow-l { from { background-position-x: 0; } to { background-position-x: -46px; } }
+
+/* ---------- Sections ---------- */
+section { padding: clamp(56px, 8vw, 104px) 0; }
+.section-head { max-width: 640px; margin-bottom: clamp(30px, 5vw, 54px); }
+.section-head p { color: var(--steel); }
+
+/* ---------- Leistungen ---------- */
+#leistungen { background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(18px, 3vw, 32px);
+}
+.service {
+  background: var(--porcelain);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.service img { aspect-ratio: 16 / 9; object-fit: cover; width: 100%; }
+.service .body { padding: 26px 28px 30px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+.service h3 { padding-top: 2px; }
+.service p { color: var(--steel); font-size: 0.98rem; }
+.service .body { border-top: 4px solid transparent; }
+.service--gruen .body { border-top-color: var(--gruen); }
+.service--rot .body { border-top-color: var(--rot); }
+.service--luft .body { border-top-color: var(--luft); }
+.service--blau .body { border-top-color: var(--blau); }
+@media (max-width: 760px) {
+  .service-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- Fakten ---------- */
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.fact { background: var(--porcelain); padding: 30px 28px; }
+.fact .num {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 2.9rem);
+  line-height: 1;
+}
+.fact .num sup { font-size: 0.45em; }
+.fact p { color: var(--steel); font-size: 0.94rem; margin-top: 10px; }
+@media (max-width: 760px) { .facts { grid-template-columns: 1fr; } }
+
+/* ---------- Ablauf ---------- */
+#ablauf { background: var(--ink); color: #fff; }
+#ablauf .section-head p { color: #9FB0B9; }
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(20px, 3vw, 36px); counter-reset: step; }
+.step { position: relative; padding-top: 20px; }
+.step::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 8px;
+  border-top: 3px solid var(--rot);
+  border-bottom: 3px solid var(--blau);
+}
+.step .no {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  color: #9FB0B9;
+}
+.step h3 { margin: 6px 0 8px; color: #fff; }
+.step p { color: #C3CFD6; font-size: 0.95rem; }
+@media (max-width: 860px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .steps { grid-template-columns: 1fr; } }
+
+/* ---------- Über uns ---------- */
+#betrieb .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
+#betrieb img { border-radius: 6px; aspect-ratio: 4 / 3; object-fit: cover; }
+#betrieb .owner {
+  margin-top: 22px;
+  padding-left: 16px;
+  border-left: 3px solid var(--rot);
+}
+#betrieb .owner strong { display: block; font-size: 1.05rem; }
+#betrieb .owner span { color: var(--steel); font-size: 0.92rem; }
+#betrieb p { color: var(--steel); }
+@media (max-width: 860px) { #betrieb .wrap { grid-template-columns: 1fr; } }
+
+/* ---------- Kontakt ---------- */
+#kontakt { background: var(--paper); border-top: 1px solid var(--line); }
+.contact-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(28px, 5vw, 64px); }
+.contact-card {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--porcelain);
+  padding: clamp(24px, 4vw, 40px);
+}
+.contact-card + .contact-card { margin-top: 18px; }
+.contact-big {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: clamp(1.5rem, 3.4vw, 2.3rem);
+  text-decoration: none;
+  display: inline-block;
+  line-height: 1.1;
+}
+.contact-big:hover { color: var(--rot); }
+.contact-list { list-style: none; display: grid; gap: 14px; margin-top: 8px; }
+.contact-list li { display: flex; gap: 12px; align-items: baseline; }
+.contact-list .k {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--steel);
+  flex: 0 0 92px;
+}
+.contact-list a { text-decoration-color: var(--line); }
+.contact-list a:hover { color: var(--blau); }
+@media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Footer ---------- */
+.site-foot { border-top: 1px solid var(--line); padding: 28px 0 36px; }
+.site-foot .wrap { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; }
+.site-foot small { color: var(--steel); font-size: 0.85rem; }
+.site-foot nav { margin-left: auto; display: flex; gap: 18px; }
+.site-foot nav a { font-size: 0.85rem; color: var(--steel); }
+.site-foot nav a:hover { color: var(--ink); }
+@media (max-width: 600px) { .site-foot nav { margin-left: 0; } }
+
+/* ---------- Scroll-Reveal (nur wenn JS aktiv & Tab sichtbar) ---------- */
+html.reveal-armed .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+html.reveal-armed .reveal.is-in { opacity: 1; transform: none; }
+
+/* ---------- Legal pages ---------- */
+.legal { padding: clamp(40px, 7vw, 80px) 0; max-width: 760px; }
+.legal h1 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); margin-bottom: 28px; }
+.legal h2 { font-size: 1.15rem; margin: 34px 0 10px; }
+.legal p, .legal li { color: var(--steel); font-size: 0.98rem; }
+.legal ul { padding-left: 20px; }
+.legal a { text-decoration-color: var(--line); }
